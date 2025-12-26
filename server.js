@@ -13,10 +13,14 @@ const userRecipesRoute = require('./routes/userRecipes');
 const app = express();
 const PORT = process.env.PORT || 5007;
 app.use(cors({
-  origin: "*", // Allow your frontend
-  allowedHeaders: ["Content-Type", "Authorization", "auth-token"] // Allow your ID Card
+  origin: [
+    "http://localhost:5173",                       // Localhost
+    "https://cozy-kitchen-api.onrender.com",       // Backend itself
+    "https://cozy-kitchen-frontend.vercel.app"    // 👈 PASTE YOUR COPIED VERCEL LINK HERE
+  ],
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization", "auth-token"]
 }));
-
 app.use(express.json());
 
 // Routes
