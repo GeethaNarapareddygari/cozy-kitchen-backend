@@ -10,7 +10,7 @@ const router = express.Router();
 
 // 1. Configure Email Sender
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
   port: 465,        
   secure: true,     
   auth: {
