@@ -8,16 +8,22 @@ const PendingUser = require('../models/PendingUser'); // ✅ Fixed: Now Imported
 
 const router = express.Router();
 
-// 1. Configure Email Sender
+// 1. Configure Email Sender (Fallback Mode)
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 465,        
-  secure: true,     
+  port: 587,              // Back to standard port
+  secure: false,          // Use STARTTLS (False for 587)
   auth: {
-    user: process.env.EMAIL_USER, // Your Gmail
-    pass: process.env.EMAIL_PASS     // Your App Password
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   },
-  family: 4
+  tls: {
+    rejectUnauthorized: false // ⚠️ Allow connection even if certs fail
+  },
+  connectionTimeout: 10000, // Wait only 10 seconds
+  greetingTimeout: 5000,    // Wait 5 seconds for hello
+  socketTimeout: 10000,     // Wait 10 seconds for data
+  family: 4                 // Force IPv4
 });
 
 // ==========================================
