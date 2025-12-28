@@ -11,6 +11,8 @@ const router = express.Router();
 // 1. Configure Email Sender
 const transporter = nodemailer.createTransport({
   service: 'gmail',
+  port: 465,        
+  secure: true,     
   auth: {
     user: process.env.EMAIL_USER, // Your Gmail
     pass: process.env.EMAIL_PASS     // Your App Password
